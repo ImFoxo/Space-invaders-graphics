@@ -30,8 +30,8 @@ namespace Space_invaders_graphics.Properties
 
         private Player()
         {
-            this.x = MainWindow.mainWindow.Width / 2;
-            this.y = MainWindow.mainWindow.Height - 105;
+            this.x = MainWindow.mainCanvas.Width / 2;
+            this.y = MainWindow.mainCanvas.Height - 105;
             this.health = 3;
             this.damage = 1;
             this.attackSpeed = 2;
@@ -54,7 +54,7 @@ namespace Space_invaders_graphics.Properties
             
         public void move(string direction)
         {
-            if (direction == "right" && x + 75 < MainWindow.mainWindow.Width)
+            if (direction == "right" && x + 75 < MainWindow.mainCanvas.Width)
                 x += 10;
             else if (direction == "left" && x > 0)
                 x -= 10;

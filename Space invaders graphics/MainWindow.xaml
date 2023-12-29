@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Space_invaders_graphics"
         mc:Ignorable="d"
         Title="Space Invaders Graphics Project" Height="500" Width="800">
-    <Canvas Name="mainCanvas" Focusable="True" Background="Black" >
+    <!--<Canvas Name="mainCanvas" Focusable="True" Background="Black" >
         
 
 
-    </Canvas>
+    </Canvas>-->
 </Window>

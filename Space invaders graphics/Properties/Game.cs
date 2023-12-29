@@ -19,6 +19,7 @@ namespace Space_invaders_graphics.Properties
         //static List<EnemyMissile> enemyMissile = new List<EnemyMissile>();
         static List<Enemy> enemies = new List<Enemy>();
 
+        private static bool isPaused = false;
 
         static string playerMoveDirection;
 
@@ -26,19 +27,23 @@ namespace Space_invaders_graphics.Properties
 
         public static void setGame()
         {
-            MainWindow.mainWindow.KeyDown += KeyIsDown;
-            MainWindow.mainWindow.KeyUp += KeyIsUp;
-            
-            gameTimer.Tick += GameLoop;
+            MainWindow.instance.KeyDown += KeyIsDown;
+            MainWindow.instance.KeyUp += KeyIsUp;
+
+			gameTimer.Tick += GameLoop;
             gameTimer.Interval = TimeSpan.FromMilliseconds(20);
             gameTimer.Start();
 
-            createEntities();
+			MainWindow.mainCanvas.Background = new SolidColorBrush(Colors.Black);
 
+			createEntities();
 		}
 
         private static void GameLoop(object sender, EventArgs e)
         {
+            if (isPaused) 
+                return;
+
             if (enemies.Count == 0)
                 spawnEnemies(6);
 
@@ -100,7 +105,7 @@ namespace Space_invaders_graphics.Properties
             };
             Canvas.SetLeft(player.model, player.x);
             Canvas.SetTop(player.model, player.y);
-            MainWindow.mainWindow.mainCanvas.Children.Add(player.model);
+            MainWindow.mainCanvas.Children.Add(player.model);
 
 			spawnEnemies(6);
 		}
@@ -121,9 +126,20 @@ namespace Space_invaders_graphics.Properties
             {
                 PlayerMissile newMissile = player.shootMissile();
                 playerMissiles.Add(newMissile);
-                MainWindow.mainWindow.mainCanvas.Children.Add(newMissile.model);
-            }
-        }
+                MainWindow.mainCanvas.Children.Add(newMissile.model);
+			}
+			if (e.Key == Key.Escape)
+            {
+                isPaused = !isPaused;
+                if (isPaused)
+                    drawPauseOverlay();
+                else
+				{
+                    erasePauseOverlay();
+				}
+			}
+
+		}
 
 		private static void spawnEnemies(int limit)
         {
@@ -133,7 +149,7 @@ namespace Space_invaders_graphics.Properties
             {
                 Enemy newEnemy = new Enemy(left, 30, 3);
                 enemies.Add(newEnemy);
-                MainWindow.mainWindow.mainCanvas.Children.Add(newEnemy.model);
+                MainWindow.mainCanvas.Children.Add(newEnemy.model);
                 left -= 60;
             }
         }
@@ -148,17 +164,43 @@ namespace Space_invaders_graphics.Properties
                     {
                         enemy.getHit(pm);
                         playerMissiles.Remove(pm);
-                        MainWindow.mainWindow.mainCanvas.Children.Remove(pm.model);
+                        MainWindow.mainCanvas.Children.Remove(pm.model);
 						break;
                     }
                 }
                 if (enemy.isDead)
                 {
                     enemies.Remove(enemy);
-                    MainWindow.mainWindow.mainCanvas.Children.Remove(enemy.model);
+                    MainWindow.mainCanvas.Children.Remove(enemy.model);
                     break;
                 }
             }
         }
+
+        private static void drawPauseOverlay()
+        {
+            TextBlock bcgk = new TextBlock() 
+            { 
+                Background = Brushes.DarkGray,
+                Width = MainWindow.mainCanvas.Width / 3,
+                Height = MainWindow.mainCanvas.Height / 3,
+                Text = "Gra paused"
+            };
+			Canvas.SetTop(bcgk, MainWindow.mainCanvas.Height / 3);
+			Canvas.SetLeft(bcgk, MainWindow.mainCanvas.Width / 3);
+            MainWindow.mainCanvas.Children.Add(bcgk);
+		}
+
+        private static void erasePauseOverlay()
+		{
+			foreach (UIElement el in MainWindow.mainCanvas.Children)
+			{
+				if (el.GetType() == typeof(TextBlock))
+				{
+					MainWindow.mainCanvas.Children.Remove(el);
+					break;
+				}
+			}
+		}
     }
 }

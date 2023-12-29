@@ -44,7 +44,7 @@ namespace Space_invaders_graphics.Properties
 			if (moveDirection == "right")
 			{
 				foreach (Enemy enemy in el)
-					if (enemy.x + 55 >= MainWindow.mainWindow.Width)
+					if (enemy.x + 55 >= MainWindow.mainCanvas.Width)
 					{
 						moveDirection = "left";
 						foreach (Enemy e in el)
