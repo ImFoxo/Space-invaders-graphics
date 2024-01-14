@@ -99,7 +99,7 @@ namespace Space_invaders_graphics.Properties
             checkForCollisions();
             drawEntities();
             updateTopLabel();
-            if (/*player.isDead*/true) endGame();
+            if (player.isDead) endGame();
         }
 
         private static void drawEntities()
