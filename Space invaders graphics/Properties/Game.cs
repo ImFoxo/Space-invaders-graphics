@@ -34,7 +34,7 @@ namespace Space_invaders_graphics.Properties
         static DispatcherTimer gameTimer = new DispatcherTimer();
 
         //Zapisywanie wyniku
-        static Label textLabel = new Label() { Content = "Enter your nickname:", Foreground = Brushes.White, FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Press Start 2P"), };
+        static Label textLabel = new Label() { Content = "     You lost!\nEnter your nickname:", Foreground = Brushes.White, FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Press Start 2P"), FontSize = 20};
         static TextBox textBox = new TextBox() { Width = 300, FontSize = 20, FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Press Start 2P"), };
         static Button nameTextButton = new Button() 
         {
@@ -99,7 +99,7 @@ namespace Space_invaders_graphics.Properties
             checkForCollisions();
             drawEntities();
             updateTopLabel();
-            if (player.isDead) endGame();
+            if (/*player.isDead*/true) endGame();
         }
 
         private static void drawEntities()
@@ -308,7 +308,7 @@ namespace Space_invaders_graphics.Properties
         {
             MainWindow.instance.Background.Opacity = 0.3;
             Canvas.SetTop(textLabel, MainWindow.mainCanvas.Height / 3 - 50);
-            Canvas.SetLeft(textLabel, MainWindow.mainCanvas.Width / 2 - 130);
+            Canvas.SetLeft(textLabel, MainWindow.mainCanvas.Width / 2 - 200);
             MainWindow.mainCanvas.Children.Add(textLabel);
             Canvas.SetTop(textBox, MainWindow.mainCanvas.Height / 3 );
             Canvas.SetLeft(textBox, MainWindow.mainCanvas.Width / 2 - 150);
@@ -324,8 +324,11 @@ namespace Space_invaders_graphics.Properties
         {
             if (textBox.Text.Length > 15 || textBox.Text.Length < 3 || textBox.Text.Contains(' '))
             {
-                Canvas.SetLeft(textLabel, MainWindow.mainCanvas.Width / 2 - 220);
-                textLabel.Content = "         Enter your nickname\n(min 3, max 15 characters, no space):";
+                Label asd = new Label() { Content = "(min 3, max 15 characters, no space)", Foreground = Brushes.White, FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Press Start 2P"), FontSize = 10 };
+                Canvas.SetTop(textLabel, MainWindow.mainCanvas.Height / 3 - 75);
+                Canvas.SetTop(asd, MainWindow.mainCanvas.Height / 3 - 30);
+                Canvas.SetLeft(asd, MainWindow.mainCanvas.Width / 2 - 185);
+                MainWindow.mainCanvas.Children.Add(asd);
             }
             else
             {
