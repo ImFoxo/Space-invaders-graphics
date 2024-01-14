@@ -15,7 +15,7 @@ namespace Space_invaders_graphics.Properties
     {
         public double x { get; set; }
         public  double y { get; set; }
-        private int health;
+        public int health;
         private int damage;
         private float attackSpeed;
         private float missileSpeed;
@@ -23,7 +23,7 @@ namespace Space_invaders_graphics.Properties
         public ImageBrush skin;
         public Rectangle model;
         public Rect hitbox;
-        private bool isDead;
+        public bool isDead = false;
         private PlayerBonus bonus;
         private int score { get; set; }
         private static Player instance;
@@ -74,6 +74,13 @@ namespace Space_invaders_graphics.Properties
         public void setBonusStrategy(PlayerBonus strategy)
         {
 
+        }
+
+        public void dealDamage(int dmg)
+        {
+            health -= dmg;
+            if (health == 0) 
+                isDead = true;
         }
     }
 }

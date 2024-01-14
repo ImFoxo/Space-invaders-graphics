@@ -1,4 +1,5 @@
-﻿using Space_invaders_graphics.Properties;
+﻿using Space_invaders_console;
+using Space_invaders_graphics.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,32 +26,16 @@ namespace Space_invaders_graphics
         public static MainWindow instance;
         public static Canvas mainCanvas;
 
-		bool goLeft, goRight;
-
-        Rectangle player;
-        Label enemiesLeft;
-
-        List<Rectangle> itemsToRemove = new List<Rectangle>();
-
-        int enemyImages = 0;
-        int bulletTimer = 0;
-        int bulletTimerLimit = 90;
-        int totalEnemies = 0;
-        int enemySpeed = 6;
-        bool gameOver = false;
-
-        DispatcherTimer gameTimer = new DispatcherTimer();
-        ImageBrush background = new ImageBrush();
-
-
         public MainWindow()
         {
             InitializeComponent();
             instance = this;
             instance.ResizeMode = ResizeMode.NoResize;
             instance.Background = new ImageBrush { ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Background.jpg")) };
+            instance.Background.Opacity = 0.5;
             setUpCanvas();
-			MenuView.createButtons();
+            HighScore.downloadScores();
+            MenuView.loadMenu();
         }
 
         private void setUpCanvas()
@@ -61,20 +46,5 @@ namespace Space_invaders_graphics
             mainCanvas.Background = new SolidColorBrush(Colors.Transparent);
             Content = mainCanvas;
         }
-
-        //private void GameLoop(object sender, EventArgs e)
-        //{
-
-        //    bulletTimer -= 3;
-
-        //    if (bulletTimer < 0)
-        //    {
-        //        enemyBulletMaker(Canvas.GetLeft(player) + 20, 10);
-        //        bulletTimer = bulletTimerLimit;
-        //    }
-
-        //    foreach (var rec in mainCanvas.Children.OfType<Rectangle>())
-        //    
-        //}
     }
 }

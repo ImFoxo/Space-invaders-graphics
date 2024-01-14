@@ -84,7 +84,10 @@ namespace Space_invaders_graphics.Properties
 		{
 			health -= missile.getDamage();
 			if (health < 0)
+			{
 				isDead = true;
+				Game.addScore();
+			}
 		}
 	}
 }

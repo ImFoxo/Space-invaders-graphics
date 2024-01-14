@@ -9,6 +9,5 @@ namespace Space_invaders_graphics.Properties
     internal interface IMissile
     {
         void move();
-        int getDamage();
     }
 }

@@ -72,12 +72,15 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\Description.cs" />
     <Compile Include="Properties\Enemy.cs" />
     <Compile Include="Properties\Game.cs" />
+    <Compile Include="Properties\HighScore.cs" />
     <Compile Include="Properties\IMissile.cs" />
     <Compile Include="Properties\MenuView.cs" />
     <Compile Include="Properties\Player.cs" />
     <Compile Include="Properties\PlayerBonus.cs" />
+    <Compile Include="Properties\EnemyMissile.cs" />
     <Compile Include="Properties\PlayerMissile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -93,6 +96,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\PressStart2P-Regular.ttf" />
+    <Resource Include="Fonts\DotGothic16-Regular.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
